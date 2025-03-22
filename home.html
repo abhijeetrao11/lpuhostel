@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Residential Booking</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab.active {
+            border-bottom: 3px solid #ff6f00;
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            padding: 20px 0;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .option {
+            flex: 1 1 calc(33.33% - 10px);
+            background: #fff;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .option:hover {
+            background: #ff6f00;
+            color: white;
+        }
+
+        .booking-section {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+
+        .booking-section button {
+            width: 100%;
+            padding: 10px;
+            background: #ff6f00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .booking-section button:hover {
+            background: #e65100;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Residential Booking</h2>
+        <div class="tabs">
+            <div class="tab active" onclick="showSection('individual')">Individual Booking</div>
+            <div class="tab" onclick="showSection('group')">Group Booking</div>
+        </div>
+
+        <div id="individual" class="section active">
+            <h3>Select Room Type</h3>
+            <div class="options">
+                <div class="option" onclick="bookRoom('Apartment Room (AC)')">Apartment Room (AC)</div>
+                <div class="option" onclick="bookRoom('Standard Room (AC)')">Standard Room (AC)</div>
+                <div class="option" onclick="bookRoom('Standard Room (Non-AC)')">Standard Room (Non-AC)</div>
+            </div>
+        </div>
+
+        <div id="group" class="section">
+            <h3>Group Booking - Closed</h3>
+        </div>
+
+        <div class="booking-section">
+            <input type="checkbox" id="agreeTerms"> I agree to book the selected residential facilities.<br>
+            <input type="checkbox" id="agreePayment"> I agree to pay the token amount of Rs. 10,000.<br>
+            <button onclick="confirmBooking()">BOOK NOW</button>
+        </div>
+    </div>
+
+    <script>
+        let roomSelected = false;
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function bookRoom(roomType) {
+            alert(`We regret to inform you that there are no available rooms for: ${roomType} at this time. Please check again later.`);
+            roomSelected = true;
+        }
+
+        function confirmBooking() {
+            if (!roomSelected) {
+                alert("Please select a room before proceeding with the booking.");
+                return;
+            }
+            if (!document.getElementById('agreeTerms').checked || !document.getElementById('agreePayment').checked) {
+                alert("Please agree to the terms and payment conditions before proceeding.");
+                return;
+            }
+            alert("Please select a room before proceeding with the booking.");
+        }
+    </script>
+</body>
+</html>
